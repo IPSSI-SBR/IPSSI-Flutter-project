@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
+const dataRoutes = require('./routes/dataRoutes');
 const loisirsRouter = require('./routes/loisirs');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/loisirs', loisirsRouter);
+app.use('/api/data', dataRoutes);
 
 app.get('/', (req, res) => {
     res.send('Bienvenue sur l\'API Loisirs!');
