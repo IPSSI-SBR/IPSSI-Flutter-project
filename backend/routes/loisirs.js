@@ -4,7 +4,7 @@ const Loisir = require('../models/Loisir');
 const Rating = require('../models/Rating');
 
 // Ajouter un loisir
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
         const loisir = await Loisir.create(req.body);
         res.status(201).send(loisir);
