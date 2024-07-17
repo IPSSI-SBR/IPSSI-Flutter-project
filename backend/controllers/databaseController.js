@@ -56,13 +56,46 @@ const initiateModels = async () => {
             where: { name: 'Littérature' },
             defaults: { name: 'Littérature' },
         });
+
         const [filmsAndSeries] = await Category.findOrCreate({
             where: { name: 'Films et Séries' },
             defaults: { name: 'Films et Séries' },
         });
+        
         const [music] = await Category.findOrCreate({
             where: { name: 'Musique' },
             defaults: { name: 'Musique' },
+
+        }); 
+        
+        const [other] = await Category.findOrCreate({
+            where: { name: 'Autres' },
+            defaults: { name: 'Autres' },
+        });
+        
+        const [art] = await Category.findOrCreate({
+            where: { name: 'Art' },
+            defaults: { name: 'Art' },
+        });
+        
+        const [videoGame] = await Category.findOrCreate({
+            where: { name: 'Jeux vidéo' },
+            defaults: { name: 'Jeux vidéo' },
+        });
+        
+        const [boardGame] = await Category.findOrCreate({
+            where: { name: 'Jeux de société' },
+            defaults: { name: 'Jeux de société' },
+        });
+        
+        const [writing] = await Category.findOrCreate({
+            where: { name: 'Ecriture' },
+            defaults: { name: 'Ecriture' },
+        });
+
+        const [meet] = await Category.findOrCreate({
+            where: { name: 'Conférence' },
+            defaults: { name: 'Conférence' },
         });
 
         // Créer des loisirs
