@@ -1,106 +1,118 @@
-const sequelize = require('../config/database');
-const User = require('../models/User');
-const Category = require('../models/Category');
-const Loisir = require('../models/Loisir');
-const Rating = require('../models/Rating');
+const sequelize = require('../config/database')
+const User = require('../models/User')
+const Category = require('../models/Category')
+const Loisir = require('../models/Loisir')
+const Rating = require('../models/Rating')
 
 exports.createAllTable = async (req, res) => {
     try {
         // Synchroniser les modèles et créer les tables
-        await sequelize.sync({ force: true });
-        console.log('Tables créées avec succès.');
+        await sequelize.sync({force: true})
+        console.log('Tables créées avec succès.')
 
         // Ajouter des données initiales
-        await initiateModels();
+        await initiateModels()
         res.status(200).json({
-            message: 'Toutes les tables sont créées et les données initiales sont ajoutées avec succès.',
-        });
+            message:
+                'Toutes les tables sont créées et les données initiales sont ajoutées avec succès.',
+        })
     } catch (error) {
-        console.error('Erreur lors de la création des tables ou de l\'ajout des données initiales:', error);
+        console.error(
+            "Erreur lors de la création des tables ou de l'ajout des données initiales:",
+            error
+        )
         res.status(500).json({
-            error: 'Erreur lors de la création des tables ou de l\'ajout des données initiales.',
-        });
+            error: "Erreur lors de la création des tables ou de l'ajout des données initiales.",
+        })
     }
 }
 
 const initiateModels = async () => {
     try {
         // Créer des utilisateurs
+        const [user0] = await User.findOrCreate({
+            where: {email: 'unknown@mail.com'},
+            defaults: {
+                username: 'unknown',
+                email: 'unknown@mail.com',
+                password: 'password',
+            },
+        })
+
         const [user1] = await User.findOrCreate({
-            where: { email: 'alice@example.com' },
+            where: {email: 'alice@example.com'},
             defaults: {
                 username: 'Alice',
                 email: 'alice@example.com',
-                password: 'password'
+                password: 'password',
             },
-        });
+        })
         const [user2] = await User.findOrCreate({
-            where: { email: 'bob@example.com' },
+            where: {email: 'bob@example.com'},
             defaults: {
                 username: 'Bob',
                 email: 'bob@example.com',
-                password: 'password'
+                password: 'password',
             },
-        });
+        })
         const [user3] = await User.findOrCreate({
-            where: { email: 'carol@example.com' },
+            where: {email: 'carol@example.com'},
             defaults: {
                 username: 'Carol',
                 email: 'carol@example.com',
-                password: 'password'
+                password: 'password',
             },
-        });
+        })
 
         // Créer des catégories
         const [literature] = await Category.findOrCreate({
-            where: { name: 'Littérature' },
-            defaults: { name: 'Littérature' },
-        });
+            where: {name: 'Littérature'},
+            defaults: {name: 'Littérature'},
+        })
 
         const [filmsAndSeries] = await Category.findOrCreate({
-            where: { name: 'Films et Séries' },
-            defaults: { name: 'Films et Séries' },
-        });
-        
-        const [music] = await Category.findOrCreate({
-            where: { name: 'Musique' },
-            defaults: { name: 'Musique' },
+            where: {name: 'Films et Séries'},
+            defaults: {name: 'Films et Séries'},
+        })
 
-        }); 
-        
+        const [music] = await Category.findOrCreate({
+            where: {name: 'Musique'},
+            defaults: {name: 'Musique'},
+        })
+
         const [other] = await Category.findOrCreate({
-            where: { name: 'Autres' },
-            defaults: { name: 'Autres' },
-        });
-        
+            where: {name: 'Autres'},
+            defaults: {name: 'Autres'},
+        })
+
         const [art] = await Category.findOrCreate({
-            where: { name: 'Art' },
-            defaults: { name: 'Art' },
-        });
-        
+            where: {name: 'Art'},
+            defaults: {name: 'Art'},
+        })
+
         const [videoGame] = await Category.findOrCreate({
-            where: { name: 'Jeux vidéo' },
-            defaults: { name: 'Jeux vidéo' },
-        });
-        
+            where: {name: 'Jeux vidéo'},
+            defaults: {name: 'Jeux vidéo'},
+        })
+
         const [boardGame] = await Category.findOrCreate({
-            where: { name: 'Jeux de société' },
-            defaults: { name: 'Jeux de société' },
-        });
-        
+            where: {name: 'Jeux de société'},
+            defaults: {name: 'Jeux de société'},
+        })
+
         const [writing] = await Category.findOrCreate({
-            where: { name: 'Ecriture' },
-            defaults: { name: 'Ecriture' },
-        });
+            where: {name: 'Ecriture'},
+            defaults: {name: 'Ecriture'},
+        })
 
         const [meet] = await Category.findOrCreate({
-            where: { name: 'Conférence' },
-            defaults: { name: 'Conférence' },
-        });
+            where: {name: 'Conférence'},
+            defaults: {name: 'Conférence'},
+        })
 
         // Créer des loisirs
         await Loisir.findOrCreate({
-            where: { title: 'Lire "Les Misérables"' },
+            where: {title: 'Lire "Les Misérables"'},
             defaults: {
                 title: 'Lire "Les Misérables"',
                 description: 'Un roman de Victor Hugo sur la justice sociale.',
@@ -108,23 +120,24 @@ const initiateModels = async () => {
                 rating: 4.7,
                 votes: 120,
                 user_id: user1.id,
-                category_id: literature.id
+                category_id: literature.id,
             },
-        });
+        })
         await Loisir.findOrCreate({
-            where: { title: 'Regarder "Inception"' },
+            where: {title: 'Regarder "Inception"'},
             defaults: {
                 title: 'Regarder "Inception"',
-                description: 'Un film de science-fiction réalisé par Christopher Nolan.',
+                description:
+                    'Un film de science-fiction réalisé par Christopher Nolan.',
                 date: new Date('2023-02-10'),
                 rating: 4.9,
                 votes: 200,
                 user_id: user2.id,
-                category_id: filmsAndSeries.id
+                category_id: filmsAndSeries.id,
             },
-        });
+        })
         await Loisir.findOrCreate({
-            where: { title: 'Écouter "Thriller"' },
+            where: {title: 'Écouter "Thriller"'},
             defaults: {
                 title: 'Écouter "Thriller"',
                 description: 'Un album iconique de Michael Jackson.',
@@ -132,11 +145,10 @@ const initiateModels = async () => {
                 rating: 4.8,
                 votes: 150,
                 user_id: user3.id,
-                category_id: music.id
+                category_id: music.id,
             },
-        });
-
+        })
     } catch (error) {
-        console.error('Erreur lors de l\'initiation des modèles :', error);
+        console.error("Erreur lors de l'initiation des modèles :", error)
     }
 }
