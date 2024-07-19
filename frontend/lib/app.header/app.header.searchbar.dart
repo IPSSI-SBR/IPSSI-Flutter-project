@@ -1,5 +1,7 @@
 // *Fonctionnement OK
+
 import 'package:flutter/material.dart';
+import 'package:frontend/app.api/app.api.request.dart';
 
 class HeaderSearchBar extends StatefulWidget {
   const HeaderSearchBar({super.key});
@@ -24,6 +26,7 @@ class _HeaderSearchBarState extends State<HeaderSearchBar> {
             EdgeInsets.symmetric(horizontal: 16.0)),
         onTap: () {},
         onChanged: (_) {},
+        onSubmitted: (value) => {Hobbies.searchHobby(value)},
         leading: const Icon(
           Icons.search,
           color: Color.fromRGBO(128, 100, 145, 1),

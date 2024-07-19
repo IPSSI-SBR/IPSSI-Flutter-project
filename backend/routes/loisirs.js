@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Loisir = require('../models/Loisir')
 const Rating = require('../models/Rating')
+const {Op} = require('sequelize')
 
 // Ajouter un loisir
 router.post('/add', async (req, res) => {
@@ -33,6 +34,20 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const loisir = await Loisir.findByPk(req.params.id)
+        if (!loisir) return res.status(404).send()
+        res.send(loisir)
+    } catch (err) {
+        res.status(500).send(err)
+    }
+})
+
+// Obtenir un loisir par son nom
+router.get('/name/:name', async (req, res) => {
+    try {
+        const loisir = await Loisir.findAll({
+            where: {title: {[Op.substring]: req.params.name}},
+        })
+        //findByPk(req.params.name)
         if (!loisir) return res.status(404).send()
         res.send(loisir)
     } catch (err) {

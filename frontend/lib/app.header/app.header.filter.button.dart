@@ -27,10 +27,10 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
         color: const Color.fromRGBO(128, 100, 145, 1),
       ),
       onChanged: (String? value) {
-        // This is called when the user selects an item.
         setState(() {
           dropdownValue = value!;
         });
+        if (dropdownValue != 'Tri') {}
       },
       items: list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(

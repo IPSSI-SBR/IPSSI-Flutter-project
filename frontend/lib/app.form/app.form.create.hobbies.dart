@@ -29,12 +29,14 @@ class _FormAddHobbyState extends State<FormAddHobby> {
   }
 
   void addHobby() async {
-    // TODO : Ajouter la méthode nécessaire à l'ajout dans la BDD
     if (_formKey.currentState!.validate()) {
       var data = {
         "title": titleController.text,
         "description": descriptionController.text,
-        "category_id": 1
+        "rating": 0,
+        "votes": 0,
+        "category_id": 1,
+        "user_id": 1
       };
       Hobbies.addHobbie(data).then((result) => {
             if (result == "success")
