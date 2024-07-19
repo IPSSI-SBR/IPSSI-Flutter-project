@@ -13,7 +13,7 @@ class TestHobbiesList extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.all(100),
+            padding: const EdgeInsets.all(42),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 const [

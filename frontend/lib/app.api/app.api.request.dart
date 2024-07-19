@@ -30,23 +30,36 @@ class Hobbies {
       return Future.error(e.toString());
     }
   }
-}
 
-/*
-class Categories {
-  static List<String> getAllCategories() async {
+  static Future<String> searchHobby(data) async {
     try {
-      var response = await http.get(Uri.parse("$baseUrl/api/category"));
+      var response =
+          await http.get(Uri.parse("$baseUrl/api/loisirs/name/$data"));
       if (response.statusCode == 200) {
-       final List<dynamic> data = json.decode(response.body);
-
-       return Futuredata.map((category) => category['name'] as String).toList();
+        return "success";
       } else {
-        return Future.error("Erreur serveur. Récupération des catégories.");
+        return Future.error("Erreur serveur");
       }
     } catch (e) {
       return Future.error(e.toString());
     }
   }
 }
-*/
+
+// class Categories {
+//   static Future<String> getAllCategories() async {
+//     try {
+//       var response = await http.get(Uri.parse("$baseUrl/api/category"));
+//       if (response.statusCode == 200) {
+//         final List<dynamic> data = json.decode(response.body);
+
+//         return Futuredata.map((category) => category['name'] as String)
+//             .toList();
+//       } else {
+//         return Future.error("Erreur serveur. Récupération des catégories.");
+//       }
+//     } catch (e) {
+//       return Future.error(e.toString());
+//     }
+//   }
+// }

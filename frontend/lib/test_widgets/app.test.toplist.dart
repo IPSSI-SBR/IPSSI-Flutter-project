@@ -11,26 +11,25 @@ class TestTopList extends StatefulWidget {
 class _TestTopListState extends State<TestTopList> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(scrollDirection: Axis.horizontal, slivers: [
-      SliverPadding(
-        padding: const EdgeInsets.all(36),
-        sliver: SliverList(
-          delegate: SliverChildListDelegate(
-            const [
-              HobbiesImageTop(assetName: "images/lectures/BD1.jpg"),
-              SizedBox(width: 10.0),
-              HobbiesImageTop(assetName: "images/lectures/BD(2).jpg"),
-              SizedBox(width: 10.0),
-              HobbiesImageTop(assetName: "images/lectures/BD(3).jpg"),
-              SizedBox(width: 10.0),
-              HobbiesImageTop(assetName: "images/lectures/BD(4).jpg"),
-              SizedBox(width: 10.0),
-              HobbiesImageTop(assetName: "images/lectures/BD(5).jpg"),
-              SizedBox(width: 10.0),
-            ],
-          ),
-        ),
-      )
-    ]);
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          const Text('Hey'),
+          ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 18,
+              itemBuilder: (context, index) {
+                return const SizedBox(
+                  width: 100,
+                  height: 150,
+                  child: Card(
+                    child: Text("test"),
+                  ),
+                );
+              })
+        ],
+      ),
+    );
   }
 }
