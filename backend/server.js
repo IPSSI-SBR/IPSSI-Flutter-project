@@ -4,15 +4,21 @@ const bodyParser = require('body-parser')
 const sequelize = require('./config/database')
 const dataRoutes = require('./routes/dataRoutes')
 const loisirsRouter = require('./routes/loisirs')
+const categoryRouter = require('./routes/categoriesRoutes')
+
+const cors = require('cors')
 
 const app = express()
+
 const port = 3000
 
 // Middleware
+app.use(cors())
 app.use(bodyParser.json())
 
 // Routes
 app.use('/api/loisirs', loisirsRouter)
+app.use('/api/category', categoryRouter)
 app.use('/api/data', dataRoutes)
 
 app.get('/', (req, res) => {
